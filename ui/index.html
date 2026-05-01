@@ -558,6 +558,13 @@
       text-underline-offset: 3px;
     }
 
+    .monetization-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
     @media (max-width: 900px) {
       .content-grid {
         grid-template-columns: 1fr;
@@ -611,6 +618,13 @@
 
       .nav-buttons {
         bottom: 18px;
+      }
+
+      .monetization-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-top: 24px;
+        margin-bottom: 36px;
       }
     }
 
@@ -792,7 +806,7 @@
       <div class="slide">
         <div class="slide-content">
           <h2 class="section-title">Revenue & Monetization</h2>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
+          <div class="monetization-grid">
             <div class="card">
               <h3>Service Fees</h3>
               <p style="font-size: 1.4rem; margin-top: 15px;">1–5% transaction fee per escrow settlement based on volume.</p>
