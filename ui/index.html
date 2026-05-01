@@ -108,7 +108,7 @@
     }
 
     .header {
-      padding: 14px 18px;
+      padding: calc(14px + env(safe-area-inset-top)) 18px 14px;
       background: rgba(0, 0, 0, 0.55);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
@@ -211,7 +211,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding-bottom: 120px;
+      padding-bottom: calc(120px + env(safe-area-inset-bottom));
       opacity: 0;
       transform: translateY(16px);
       transition: opacity 420ms ease, transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -305,7 +305,7 @@
 
     .nav-buttons {
       position: absolute;
-      bottom: 40px;
+      bottom: calc(26px + env(safe-area-inset-bottom));
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -375,6 +375,52 @@
     .check { color: #00f5c4; }
     .cross { color: #ff4d4d; }
 
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 12px;
+    }
+
+    .table-wrap table {
+      min-width: 760px;
+    }
+
+    .exec-head {
+      text-align: center;
+      margin-bottom: clamp(24px, 6vw, 60px);
+    }
+
+    .exec-title {
+      font-size: clamp(2.1rem, 6.2vw, 3.5rem);
+    }
+
+    .exec-lead {
+      font-size: clamp(1.05rem, 3.8vw, 1.6rem);
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .metric-subtitle {
+      margin-top: 10px;
+      font-size: clamp(1.1rem, 3.8vw, 1.6rem);
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .metric-card {
+      max-width: 600px;
+      margin: clamp(22px, 5vw, 40px) auto 0;
+      background: rgba(26, 26, 46, 0.78);
+      padding: clamp(18px, 4vw, 30px);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+    }
+
     .big-number {
       font-size: clamp(4.4rem, 9vw, 7rem);
       font-weight: bold;
@@ -426,11 +472,10 @@
     }
 
     .flow-steps {
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
       margin-top: 50px;
-      flex-wrap: wrap;
-      gap: 15px;
     }
 
     .flow-step {
@@ -439,8 +484,7 @@
       padding: 22px 22px 20px;
       border-radius: 14px;
       text-align: center;
-      flex: 1;
-      min-width: 190px;
+      min-width: 0;
       box-shadow: var(--shadow-soft);
       backdrop-filter: blur(10px);
       transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
@@ -571,6 +615,13 @@
         gap: 24px;
       }
 
+      .flow-steps {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-top: 22px;
+        margin-bottom: 44px;
+      }
+
       .nav-btn {
         width: 54px;
         height: 54px;
@@ -581,11 +632,11 @@
 
     @media (max-width: 600px) {
       .slide-content {
-        padding-bottom: 100px;
+        padding-bottom: calc(100px + env(safe-area-inset-bottom));
       }
 
       .header {
-        padding: 12px 14px;
+        padding: calc(12px + env(safe-area-inset-top)) 14px 12px;
       }
 
       .brand-mark {
@@ -617,7 +668,7 @@
       }
 
       .nav-buttons {
-        bottom: 18px;
+        bottom: calc(16px + env(safe-area-inset-bottom));
       }
 
       .monetization-grid {
@@ -628,13 +679,48 @@
       }
 
       .flow-steps {
-        margin-top: 24px;
-        margin-bottom: 40px;
+        grid-template-columns: 1fr;
+        margin-top: 22px;
+        margin-bottom: 44px;
         gap: 14px;
       }
 
       .flow-step {
         min-width: 0;
+        padding: 18px 18px 16px;
+        text-align: left;
+      }
+
+      .flow-step__icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        margin: 0 0 12px;
+      }
+
+      .flow-step__title {
+        font-size: 1rem;
+        margin-bottom: 6px;
+      }
+
+      .flow-step__desc {
+        font-size: 1rem;
+      }
+
+      .tx-slide .slide-content {
+        justify-content: flex-start;
+        padding-top: 12px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .flow-step {
+        padding: 16px 16px 14px;
+      }
+
+      .flow-step__icon {
+        width: 40px;
+        height: 40px;
       }
     }
 
@@ -644,7 +730,7 @@
       }
 
       .nav-buttons {
-        bottom: 14px;
+        bottom: calc(12px + env(safe-area-inset-bottom));
       }
     }
 
@@ -698,11 +784,11 @@
       <!-- Slide 2: Executive Summary -->
       <div class="slide">
         <div class="slide-content">
-          <div style="text-align: center; margin-bottom: 60px;">
+          <div class="exec-head">
             <div class="accent-line"></div>
-            <h2 style="font-size: 3.5rem;">Executive Summary</h2>
+            <h2 class="exec-title">Executive Summary</h2>
           </div>
-          <p style="font-size: 1.6rem; text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+          <p class="exec-lead">
             A digital trust bridge connecting buyers and sellers.<br>
             <strong>We hold the funds; you deliver the value.</strong><br>
             Satisfaction guaranteed for both sides of the coin.
@@ -886,7 +972,7 @@
       </div>
 
       <!-- Slide 7: Transaction Lifecycle -->
-      <div class="slide">
+      <div class="slide tx-slide">
         <div class="slide-content">
           <h2 class="section-title">Transaction Lifecycle</h2>
           <div class="flow-steps">
@@ -956,8 +1042,8 @@
         <div class="slide-content" style="text-align: center;">
           <h2 class="section-title" style="justify-content: center;">The Trust Metric</h2>
           <div class="big-number">95%</div>
-          <h3 style="margin-top: -20px;">Fraud Reduction Rate</h3>
-          <div style="max-width: 600px; margin: 40px auto; background: #1a1a2e; padding: 30px; border-radius: 16px;">
+          <h3 class="metric-subtitle">Fraud Reduction Rate</h3>
+          <div class="metric-card">
             <p>Our pilot data suggests that escrow-based systems eliminate <strong>95%</strong> of social commerce fraud by removing the incentive for non-delivery.</p>
             <p style="margin-top: 15px; color: var(--accent);">Developers should focus on the <strong>idempotency</strong> of fund locks.</p>
           </div>
@@ -968,7 +1054,8 @@
       <div class="slide">
         <div class="slide-content">
           <h2 class="section-title">Competitive Landscape</h2>
-          <table>
+          <div class="table-wrap">
+            <table>
             <thead>
               <tr>
                 <th>Feature</th>
@@ -1003,7 +1090,8 @@
                 <td class="cross">✗ No</td>
               </tr>
             </tbody>
-          </table>
+            </table>
+          </div>
         </div>
       </div>
 
